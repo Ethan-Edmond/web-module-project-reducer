@@ -6,7 +6,7 @@ import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
 import reducer, { initialState } from "./reducers";
-import { addOne, applyNumber, changeOperator } from "./actions";
+import { addOne, addToMem, applyNumber, changeOperator, clearDisplay } from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -17,6 +17,14 @@ function App() {
 
   const handleOpChange = (e) => {
     dispatch(changeOperator(e.target.textContent));
+  };
+
+  const handleClear = (e) => {
+    dispatch(clearDisplay());
+  };
+
+  const handleAddToMem = (e) => {
+    dispatch(addToMem());
   };
 
   return (
@@ -36,7 +44,7 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
+              <CalcButton value={"M+"} onClick={handleAddToMem}/>
               <CalcButton value={"MR"}/>
               <CalcButton value={"MC"}/>
             </div>
@@ -66,7 +74,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={handleClear}/>
             </div>
 
           </form>
