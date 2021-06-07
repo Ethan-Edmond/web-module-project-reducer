@@ -6,6 +6,8 @@ export const CLEAR_DISPLAY = "CLEAR_DISPLAY";
 export const ADD_TO_MEM = "ADD_TO_MEM";
 export const PULL_FROM_MEM = "PULL_FROM_MEM";
 export const CLEAR_MEM = "CLEAR_MEM";
+export const ADD_DIGIT = "ADD_DIGIT";
+export const ENTER_DIGIT = "ENTER_DIGIT";
 
 export const addOne = () => {
     return({type:ADD_ONE});
@@ -34,3 +36,11 @@ export const pullFromMem = () => {
 export const clearMem = () => {
   return({type: CLEAR_MEM});
 };
+
+export const addDigit = (numberString) => {
+  return({type: ADD_DIGIT, payload: numberString});
+};
+
+export const enterDigit = () => {
+  return({type: ENTER_DIGIT});
+}

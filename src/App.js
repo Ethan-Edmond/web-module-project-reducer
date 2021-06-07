@@ -6,7 +6,7 @@ import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
 import reducer, { initialState } from "./reducers";
-import { addOne, addToMem, applyNumber, changeOperator, clearDisplay, clearMem, pullFromMem } from "./actions";
+import { addOne, addDigit, addToMem, applyNumber, changeOperator, clearDisplay, clearMem, enterDigit, pullFromMem } from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -35,6 +35,14 @@ function App() {
     dispatch(clearMem());
   };
 
+  const handleAddDigit = (e) => {
+    dispatch(addDigit(e.target.textContent));
+  };
+
+  const handleEnterDigit = (e) => {
+    dispatch(enterDigit());
+  };
+
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -46,6 +54,8 @@ function App() {
           <form name="Cal">
             
             <TotalDisplay value={state.total}/>
+            <TotalDisplay value={state.workingNumber}/>
+
             <div className="row details">
               <span id="operation"><b>Operation:</b> {state.operation}</span>
               <span id="memory"><b>Memory:</b> {state.memory}</span>
@@ -58,21 +68,21 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={1} onClick={handleApply}/>
-              <CalcButton value={2} onClick={handleApply}/>
-              <CalcButton value={3} onClick={handleApply}/>
+              <CalcButton value={1} onClick={handleAddDigit}/>
+              <CalcButton value={2} onClick={handleAddDigit}/>
+              <CalcButton value={3} onClick={handleAddDigit}/>
             </div>
 
             <div className="row">
-              <CalcButton value={4} onClick={handleApply}/>
-              <CalcButton value={5} onClick={handleApply}/>
-              <CalcButton value={6} onClick={handleApply}/>
+              <CalcButton value={4} onClick={handleAddDigit}/>
+              <CalcButton value={5} onClick={handleAddDigit}/>
+              <CalcButton value={6} onClick={handleAddDigit}/>
             </div>
 
             <div className="row">
-              <CalcButton value={7} onClick={handleApply}/>
-              <CalcButton value={8} onClick={handleApply}/>
-              <CalcButton value={9} onClick={handleApply}/>
+              <CalcButton value={7} onClick={handleAddDigit}/>
+              <CalcButton value={8} onClick={handleAddDigit}/>
+              <CalcButton value={9} onClick={handleAddDigit}/>
             </div>
 
             <div className="row">
@@ -83,6 +93,7 @@ function App() {
 
             <div className="row ce_button">
               <CalcButton value={"CE"} onClick={handleClear}/>
+              <CalcButton value={"="} onClick={handleEnterDigit}/>
             </div>
 
           </form>

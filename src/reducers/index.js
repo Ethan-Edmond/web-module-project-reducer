@@ -1,10 +1,15 @@
-import { ADD_ONE, ADD_TO_MEM, APPLY_NUMBER, CHANGE_OPERATION, CLEAR_DISPLAY, CLEAR_MEM, PULL_FROM_MEM } from './../actions';
+import {
+  ADD_ONE, ADD_DIGIT, ADD_TO_MEM, APPLY_NUMBER,
+  CHANGE_OPERATION, CLEAR_DISPLAY, CLEAR_MEM,
+  ENTER_DIGIT, PULL_FROM_MEM
+} from './../actions';
 
 export const initialState = {
-    total: 0,
-    operation: "+",
-    memory: 0
-}
+  total: 0,
+  operation: "+",
+  memory: 0,
+  workingNumber: ""
+};
 
 const calculateResult = (num1, num2, operation) => {
     switch(operation) {
@@ -40,7 +45,8 @@ const reducer = (state, action) => {
   case(CLEAR_DISPLAY):
     return ({
       ...state,
-      total: 0
+      total: 0,
+      workingNumber: ""
     });
 
   case(ADD_TO_MEM):
@@ -59,6 +65,18 @@ const reducer = (state, action) => {
     return ({
       ...state,
       memory: 0
+    });
+
+  case(ADD_DIGIT):
+    return ({
+      ...state,
+      workingNumber: state.workingNumber + action.payload
+    });
+
+  case(ENTER_DIGIT):
+    return ({
+      ...state,
+      total: calculateResult(state.total, Number(state.workingNumber), state.operation)
     });
 
   default:
