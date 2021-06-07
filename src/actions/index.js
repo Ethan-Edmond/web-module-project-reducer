@@ -5,6 +5,7 @@ export const CHANGE_OPERATION = "CHANGE_OPERATION";
 export const CLEAR_DISPLAY = "CLEAR_DISPLAY";
 export const ADD_TO_MEM = "ADD_TO_MEM";
 export const PULL_FROM_MEM = "PULL_FROM_MEM";
+export const CLEAR_MEM = "CLEAR_MEM";
 
 export const addOne = () => {
     return({type:ADD_ONE});
@@ -28,4 +29,8 @@ export const addToMem = () => {
 
 export const pullFromMem = () => {
   return({type: PULL_FROM_MEM});
+};
+
+export const clearMem = () => {
+  return({type: CLEAR_MEM});
 };

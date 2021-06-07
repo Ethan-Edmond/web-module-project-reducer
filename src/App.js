@@ -6,7 +6,7 @@ import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
 import reducer, { initialState } from "./reducers";
-import { addOne, addToMem, applyNumber, changeOperator, clearDisplay, pullFromMem } from "./actions";
+import { addOne, addToMem, applyNumber, changeOperator, clearDisplay, clearMem, pullFromMem } from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -31,6 +31,10 @@ function App() {
     dispatch(pullFromMem());
   };
 
+  const handleClearMem = (e) => {
+    dispatch(clearMem());
+  };
+
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -50,7 +54,7 @@ function App() {
             <div className="row">
               <CalcButton value={"M+"} onClick={handleAddToMem}/>
               <CalcButton value={"MR"} onClick={handlePullFromMem}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"MC"} onClick={handleClearMem}/>
             </div>
 
             <div className="row">
